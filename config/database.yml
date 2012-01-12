@@ -12,9 +12,9 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: simple_cms
+  database: simple_cms_development
   pool: 5
-  username: root
+  username: simple_cms
   password: password
   socket: /var/run/mysqld/mysqld.sock
 
