@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112221936) do
+ActiveRecord::Schema.define(:version => 20120116163042) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "first_name",      :limit => 25
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(:version => 20120112221936) do
 
   add_index "admin_users", ["username"], :name => "index_admin_users_on_username"
 
+  create_table "admin_users_pages", :id => false, :force => true do |t|
+    t.integer "admin_user_id"
+    t.integer "page_id"
+  end
+
+  add_index "admin_users_pages", ["admin_user_id", "page_id"], :name => "index_admin_users_pages_on_admin_user_id_and_page_id"
+
   create_table "pages", :force => true do |t|
     t.integer  "subject_id"
     t.string   "name"
@@ -38,6 +45,16 @@ ActiveRecord::Schema.define(:version => 20120112221936) do
 
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
   add_index "pages", ["subject_id"], :name => "index_pages_on_subject_id"
+
+  create_table "section_edits", :force => true do |t|
+    t.integer  "admin_user_id"
+    t.integer  "section_id"
+    t.string   "summary"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "section_edits", ["admin_user_id", "section_id"], :name => "index_section_edits_on_admin_user_id_and_section_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "page_id"

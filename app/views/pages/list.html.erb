@@ -1,0 +1,36 @@
+<% @page_title = "Pages List" %>
+
+<div class="Pages list">
+	<h2>Pages</h2>
+
+	<%= link_to("Add New Page", {:action => 'new'}, :class => 'action') %>
+
+	<table class="listing" summary="Page list">
+	<tr class="header">
+		<th>ID</th>
+		<th>Page</th>
+		<th>Position</th>
+		<th>Permalink</th>
+		<th>Visible</th>
+		<th>Subject</th>
+		<th>Sections</th>
+		<th>Actions</th>
+	</tr>
+	<% @pages.each do |page| %>
+	<tr class="<%= cycle('odd', 'even') %>">
+		<td><%= page.id %></td>
+		<td><%= page.name %></td>
+		<td><%= page.position %></td>
+		<td><%= page.permalink %></td>
+		<td class="center"><%= status_tag(page.visible) %></td>
+		<td class="center"><%= page.subject_id %></td>
+		<td class="center"><%= page.sections.size %></td>
+		<td class="actions">
+			<%= link_to("Show", {:action => 'show', :id => page.id}, :class => 'action show') %>
+			<%= link_to("Edit", {:action => 'edit', :id => page.id}, :class => 'action edit') %>
+			<%= link_to("Delete", {:action => 'delete', :id => page.id}, :class => 'action delete') %>
+		</td>
+	</tr>
+	<% end %>
+	</table>
+</div>

@@ -1,0 +1,21 @@
+<%= error_messages_for(@subject) %>
+<table summary="Subject form fields">
+	<tr>
+		<th><%= f.label(:name) %></th>
+		<td><%= f.text_field(:name) %></td>
+	</tr>
+	<tr>
+		<th><%= f.label(:position) %></th>
+		<td>
+			<%= f.select(:position, options_for_select((1..@subject_count).to_a, :selected => @subject.position ? @subject.position : @subject_count)) %>
+		</td>
+	</tr>
+	<tr>
+		<th><%= f.label(:visible) %></th>
+		<td><%= f.check_box(:visible) %></td>
+	</tr>
+	<tr>
+		<th><%= f.label(:created_at, "Created") %></th>
+		<td><%= f.datetime_select(:created_at, {:include_seconds => true, :prompt => true}) %></td>
+	</tr>
+</table>
