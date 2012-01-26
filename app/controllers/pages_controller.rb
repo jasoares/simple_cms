@@ -10,7 +10,7 @@ class PagesController < ApplicationController
 	end
 
 	def list
-		@pages = Page.order("pages.subject_id ASC").order("pages.position ASC")
+		@pages = Page.sorted
 	end
 
 	def show

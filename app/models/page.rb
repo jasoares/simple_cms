@@ -12,5 +12,7 @@ class Page < ActiveRecord::Base
 	# use presence with length to disallow spaces
 	validates_uniqueness_of :permalink
 	  # for unique values by subject, :scope => :subject_id
+	
+	scope :sorted, order("pages.subject_id ASC").order("pages.position ASC")
 
 end

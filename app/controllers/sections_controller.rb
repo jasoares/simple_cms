@@ -10,7 +10,7 @@ class SectionsController < ApplicationController
 	end
 
 	def list
-		@sections = Section.order("sections.page_id ASC").order("sections.position ASC")
+		@sections = Section.sorted
 	end
 
 	def show

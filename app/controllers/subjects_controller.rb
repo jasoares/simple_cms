@@ -10,7 +10,7 @@ class SubjectsController < ApplicationController
 	end
 
 	def list
-		@subjects = Subject.order("subjects.position ASC")
+		@subjects = Subject.sorted
 	end
 
 	def show
