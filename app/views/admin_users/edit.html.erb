@@ -1,9 +1,9 @@
-<% @page_title = "Edit Admin User" %>
+<% @page_title = "Edit Admin User: #{@admin_user.name}" %>
 
 <%= render(:partial => "shared/back") %>
 
 <div class="admin_user edit">
-  <h2>Update Admin User</h2>
+  <h2>Edit Admin User</h2>
 
   <%= form_for(:admin_user, :url => {:action => 'update', :id => @admin_user.id}) do |f| %>
 

@@ -1,4 +1,4 @@
-<% @page_title = "Delete Admin User" %>
+<% @page_title = "Delete Admin User: #{@admin_user.name}" %>
 
 <%= render(:partial => "shared/back") %>
 
@@ -8,9 +8,12 @@
   <%= form_for(:subject, :url => {:action => 'destroy', :id => @admin_user.id}) do |f| -%>
 
     <p>Are you sure you want to permanently delete this admin user?</p>
+    
     <p class="reference-name"><%= @admin_user.name %></p>
+    
     <div class="form-buttons">
       <%= submit_tag("Delete Admin User") %>
     </div>
+  
   <% end %>
 </div>
