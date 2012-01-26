@@ -3,6 +3,7 @@ class SectionsController < ApplicationController
 	layout 'admin'
 
 	before_filter :confirm_logged_in
+	before_filter :find_page
 
 	def index
 		list
@@ -10,7 +11,7 @@ class SectionsController < ApplicationController
 	end
 
 	def list
-		@sections = Section.sorted
+		@sections = Section.sorted.where(:page_id => @page.id)
 	end
 
 	def show
@@ -18,7 +19,7 @@ class SectionsController < ApplicationController
 	end
 
 	def new
-		@section = Section.new
+		@section = Section.new(:page_id => @page.id)
 		@section_count = Section.count + 1
 		@pages = Page.all
 	end
@@ -30,7 +31,7 @@ class SectionsController < ApplicationController
 		if @section.save
 			# If save succeeds, redirect to the list action
 			flash[:notice] = "Section created."
-			redirect_to(:action => 'list')
+			redirect_to(:action => 'list', :page_id => @section.page_id)
 		else
 			# If save fails, redisplay the form so user can fix problems
 			@section_count = Section.count + 1
@@ -52,7 +53,7 @@ class SectionsController < ApplicationController
 		if @section.update_attributes(params[:section])
 			# If update succeeds, redirect to the list action
 			flash[:notice] = "Section updated."
-			redirect_to(:action => 'show', :id => @section.id)
+			redirect_to(:action => 'show', :id => @section.id, :page_id => @section.page_id)
 		else
 			# If update fails, redisplay the form so user can fix problems
 			@section_count = Section.count
@@ -68,6 +69,13 @@ class SectionsController < ApplicationController
 	def destroy
 		Section.find(params[:id]).destroy
 		flash[:notice] = "Section destroyed."
-		redirect_to(:action => 'list')
+		redirect_to(:action => 'list', :page_id => @page.id)
 	end
+
+	def find_page
+		if params[:page_id]
+			@page = Page.find_by_id(params[:page_id])
+		end
+	end
+
 end

@@ -31,7 +31,7 @@ class PagesController < ApplicationController
 		if @page.save
 			# If save succeeds, redirect to the list action
 			flash[:notice] = "Page created."
-			redirect_to(:action => 'list', :subject_id => @page.subject.id)
+			redirect_to(:action => 'list', :subject_id => @page.subject_id)
 		else
 			# If save fails, redisplay the form so user can fix problems
 			@page_count = Page.count + 1

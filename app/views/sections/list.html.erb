@@ -1,11 +1,11 @@
 <% @page_title = "Sections List" %>
 
 <div class="Sections list">
-	<h2>Sections</h2>
+	<h2>Sections<%= " from #{@page.name}" %></h2>
 
-	<%= link_to("<< Back to Pages List", {:controller => 'pages', :action => 'list'}, :class => 'back-link') %>
+	<%= link_to("<< Back to Pages List", {:controller => 'pages', :action => 'list', :subject_id => @page.subject_id}, :class => 'back-link') %>
 
-	<%= link_to("Add New Section", {:action => 'new'}, :class => 'action') %>
+	<%= link_to("Add New Section", {:action => 'new', :page_id => @page.id}, :class => 'action') %>
 
 	<table class="listing" summary="Section list">
 	<tr class="header">
@@ -28,9 +28,9 @@
 			<td><%= content_type(section) %></td>
 			<td><%= show_content(section) %></td>
 			<td class="actions">
-				<%= link_to("Show", {:action => 'show', :id => section.id}, :class => 'action show') %>
-				<%= link_to("Edit", {:action => 'edit', :id => section.id}, :class => 'action edit') %>
-				<%= link_to("Delete", {:action => 'delete', :id => section.id}, :class => 'action delete') %>
+				<%= link_to("Show", {:action => 'show', :id => section.id, :page_id => @page.id}, :class => 'action show') %>
+				<%= link_to("Edit", {:action => 'edit', :id => section.id, :page_id => @page.id}, :class => 'action edit') %>
+				<%= link_to("Delete", {:action => 'delete', :id => section.id, :page_id => @page.id}, :class => 'action delete') %>
 			</td>
 		</tr>
 	<% end %>
