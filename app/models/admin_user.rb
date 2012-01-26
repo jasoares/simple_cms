@@ -37,8 +37,13 @@ class AdminUser < ActiveRecord::Base
 	after_save :clear_password
 
 	scope :named, lambda {|first, last| where(:first_name => first, :last_name => last)}
+	scope :sorted, order("admin_users.last_name ASC").order("admin_users.first_name ASC")
 
 	attr_protected :hashed_password, :salt
+
+	def name
+		first_name + " " + last_name
+	end
 
 	def self.authenticate(username="", password="")
 		user = AdminUser.find_by_username(username)
