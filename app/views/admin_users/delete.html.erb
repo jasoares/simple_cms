@@ -1,6 +1,6 @@
 <% @page_title = "Delete Admin User: #{@admin_user.name}" %>
 
-<%= render(:partial => "shared/back") %>
+<%= link_to("<< Back to List", {:action => 'list'}, :class => 'back-link') %>
 
 <div class="admin_user delete">
   <h2>Delete Admin User</h2>

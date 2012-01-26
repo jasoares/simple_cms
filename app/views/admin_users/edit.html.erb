@@ -1,6 +1,6 @@
 <% @page_title = "Edit Admin User: #{@admin_user.name}" %>
 
-<%= render(:partial => "shared/back") %>
+<%= link_to("<< Back to List", {:action => 'list'}, :class => 'back-link') %>
 
 <div class="admin_user edit">
   <h2>Edit Admin User</h2>
