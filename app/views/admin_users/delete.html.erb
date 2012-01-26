@@ -1,2 +1,16 @@
-<h1>AdminUsers#delete</h1>
-<p>Find me in app/views/admin_users/delete.html.erb</p>
+<% @page_title = "Delete Admin User" %>
+
+<%= render(:partial => "shared/back") %>
+
+<div class="admin_user delete">
+  <h2>Delete Admin User</h2>
+
+  <%= form_for(:subject, :url => {:action => 'destroy', :id => @admin_user.id}) do |f| -%>
+
+    <p>Are you sure you want to permanently delete this admin user?</p>
+    <p class="reference-name"><%= @admin_user.name %></p>
+    <div class="form-buttons">
+      <%= submit_tag("Delete Admin User") %>
+    </div>
+  <% end %>
+</div>
