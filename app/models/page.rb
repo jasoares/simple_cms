@@ -13,6 +13,8 @@ class Page < ActiveRecord::Base
 	validates_uniqueness_of :permalink
 	  # for unique values by subject, :scope => :subject_id
 	
-	scope :sorted, order("pages.subject_id ASC").order("pages.position ASC")
+	scope :visible, where(:visible => true)
+	scope :invisible, where(:visible => false)
+	scope :sorted, order("pages.position ASC")
 
 end
