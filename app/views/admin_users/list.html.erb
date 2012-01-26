@@ -3,6 +3,8 @@
 <div class="admin_users list">
   <h2>Admin Users</h2>
 
+  <%= link_to("<< Back to Menu", {:controller => 'access', :action => 'menu'}, :class => 'back-link') %>
+
   <%= link_to("Add New Admin User", {:action => 'new'}, :class => 'action new') %>
 
   <div><%= pluralize(@admin_users.size, 'admin user') %> found</div>
