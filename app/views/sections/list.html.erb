@@ -3,6 +3,8 @@
 <div class="Sections list">
 	<h2>Sections</h2>
 
+	<%= link_to("<< Back to Pages List", {:controller => 'pages', :action => 'list'}, :class => 'back-link') %>
+
 	<%= link_to("Add New Section", {:action => 'new'}, :class => 'action') %>
 
 	<table class="listing" summary="Section list">

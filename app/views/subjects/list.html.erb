@@ -3,6 +3,8 @@
 <div class="subjects list">
 	<h2>Subjects</h2>
 
+	<%= link_to("<< Back to Menu", {:controller => 'access', :action => 'menu'}, :class => 'back-link') %>
+
 	<%= link_to("Add New Subject", {:action => 'new'}, :class => 'action new') %>
 
 	<div><%= pluralize(@subjects.size, 'subject') %> found</div>

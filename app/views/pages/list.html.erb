@@ -1,9 +1,11 @@
 <% @page_title = "Pages List" %>
 
 <div class="Pages list">
-	<h2>Pages</h2>
+	<h2>Pages<%= " from #{@subject.name}" if @subject %></h2>
 
-	<%= link_to("Add New Page", {:action => 'new'}, :class => 'action') %>
+	<%= link_to("<< Back to Subjects List", {:controller => 'subjects', :action => 'list'}, :class => 'back-link') %>
+
+	<%= link_to("Add New Page", {:action => 'new', :subject_id => @subject.id}, :class => 'action new') %>
 
 	<table class="listing" summary="Page list">
 	<tr class="header">
@@ -26,9 +28,9 @@
 		<td class="center"><%= page.subject_id %></td>
 		<td class="center"><%= page.sections.size %></td>
 		<td class="actions">
-			<%= link_to("Show", {:action => 'show', :id => page.id}, :class => 'action show') %>
-			<%= link_to("Edit", {:action => 'edit', :id => page.id}, :class => 'action edit') %>
-			<%= link_to("Delete", {:action => 'delete', :id => page.id}, :class => 'action delete') %>
+			<%= link_to("Show", {:action => 'show', :id => page.id, :subject_id => @subject.id}, :class => 'action show') %>
+			<%= link_to("Edit", {:action => 'edit', :id => page.id, :subject_id => @subject.id}, :class => 'action edit') %>
+			<%= link_to("Delete", {:action => 'delete', :id => page.id, :subject_id => @subject.id}, :class => 'action delete') %>
 		</td>
 	</tr>
 	<% end %>

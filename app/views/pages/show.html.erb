@@ -1,6 +1,6 @@
 <% @page_title = "Show Page" %>
 
-<%= link_to("<< Back to List", {:action => 'list'}, :class => 'back-link') %>
+<%= link_to("<< Back to List", {:action => 'list', :subject_id => @subject.id}, :class => 'back-link') %>
 
 <div class="page show">
 
