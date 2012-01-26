@@ -20,7 +20,7 @@ class SectionsController < ApplicationController
 
 	def new
 		@section = Section.new(:page_id => @page.id)
-		@section_count = Section.count + 1
+		@section_count = @page.sections.size + 1 # equal to Section.where(:page_id => @page.id).count + 1
 		@pages = Page.all
 	end
 
@@ -34,7 +34,7 @@ class SectionsController < ApplicationController
 			redirect_to(:action => 'list', :page_id => @section.page_id)
 		else
 			# If save fails, redisplay the form so user can fix problems
-			@section_count = Section.count + 1
+			@section_count = @page.sections.size + 1
 			@pages = Page.all
 			render('new')
 		end
@@ -42,7 +42,7 @@ class SectionsController < ApplicationController
 
 	def edit
 		@section = Section.find(params[:id])
-		@section_count = Section.count
+		@section_count = @page.sections.size
 		@pages = Page.all
 	end
 
@@ -56,7 +56,7 @@ class SectionsController < ApplicationController
 			redirect_to(:action => 'show', :id => @section.id, :page_id => @section.page_id)
 		else
 			# If update fails, redisplay the form so user can fix problems
-			@section_count = Section.count
+			@section_count = @page.sections.size
 			@pages = Page.all
 			render('edit')
 		end

@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 
 	def new
 		@page = Page.new(:subject_id => @subject.id)
-		@page_count = Page.count + 1
+		@page_count = @subject.pages.size + 1 # equal to Page.where(:subject_id => @subject.id).count + 1
 		@subjects = Subject.all
 	end
 
@@ -34,7 +34,7 @@ class PagesController < ApplicationController
 			redirect_to(:action => 'list', :subject_id => @page.subject_id)
 		else
 			# If save fails, redisplay the form so user can fix problems
-			@page_count = Page.count + 1
+			@page_count = @subject.pages.size + 1
 			@subjects = Subject.all
 			render('new')
 		end
@@ -42,7 +42,7 @@ class PagesController < ApplicationController
 
 	def edit
 		@page = Page.find(params[:id])
-		@page_count = Page.count
+		@page_count = @subject.pages.size
 		@subjects = Subject.all
 	end
 
@@ -56,7 +56,7 @@ class PagesController < ApplicationController
 			redirect_to(:action => 'show', :id => @page.id, :subject_id => @page.subject.id)
 		else
 			# If update fails, redisplay the form so user can fix problems
-			@page_count = Page.count
+			@page_count = @subject.pages.size
 			@subjects = Subject.all
 			render('edit')
 		end
