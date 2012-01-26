@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 	layout 'admin'
 
 	before_filter :confirm_logged_in
+	before_filter :find_subject
 
 	def index
 		list
@@ -10,7 +11,7 @@ class PagesController < ApplicationController
 	end
 
 	def list
-		@pages = Page.sorted
+		@pages = Page.sorted.where(:subject_id => @subject.id)
 	end
 
 	def show
@@ -18,7 +19,7 @@ class PagesController < ApplicationController
 	end
 
 	def new
-		@page = Page.new
+		@page = Page.new(:subject_id => @subject.id)
 		@page_count = Page.count + 1
 		@subjects = Subject.all
 	end
@@ -30,7 +31,7 @@ class PagesController < ApplicationController
 		if @page.save
 			# If save succeeds, redirect to the list action
 			flash[:notice] = "Page created."
-			redirect_to(:action => 'list')
+			redirect_to(:action => 'list', :subject_id => @page.subject.id)
 		else
 			# If save fails, redisplay the form so user can fix problems
 			@page_count = Page.count + 1
@@ -52,7 +53,7 @@ class PagesController < ApplicationController
 		if @page.update_attributes(params[:page])
 			# If update succeeds, redirect to the list action
 			flash[:notice] = "Page updated."
-			redirect_to(:action => 'show', :id => @page.id)
+			redirect_to(:action => 'show', :id => @page.id, :subject_id => @page.subject.id)
 		else
 			# If update fails, redisplay the form so user can fix problems
 			@page_count = Page.count
@@ -68,7 +69,15 @@ class PagesController < ApplicationController
 	def destroy
 		Page.find(params[:id]).destroy
 		flash[:notice] = "Page destroyed."
-		redirect_to(:action => 'list')
+		redirect_to(:action => 'list', :subject_id => @subject.id)
+	end
+
+	private
+
+	def find_subject
+		if params[:subject_id]
+			@subject = Subject.find_by_id(params[:subject_id])
+		end
 	end
 
 end
