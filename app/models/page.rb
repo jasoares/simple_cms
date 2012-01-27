@@ -1,5 +1,7 @@
 class Page < ActiveRecord::Base
 
+	include PositionMover
+
 	#uncomment if it doesn't follow the naming convention
 	belongs_to :subject#, {:foreign_key => "subject_id"}
 	has_many :sections
@@ -16,5 +18,11 @@ class Page < ActiveRecord::Base
 	scope :visible, where(:visible => true)
 	scope :invisible, where(:visible => false)
 	scope :sorted, order("pages.position ASC")
+
+	private
+
+	def position_scope
+  	"pages.subject_id = #{subject_id.to_i}"
+  end
 
 end

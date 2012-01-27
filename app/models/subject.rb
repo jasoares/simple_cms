@@ -1,5 +1,7 @@
 class Subject < ActiveRecord::Base
 
+	include PositionMover
+
 	has_many :pages
 
 	# Don't need to validate (in most cases):

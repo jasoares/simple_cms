@@ -25,10 +25,12 @@ class PagesController < ApplicationController
 	end
 
 	def create
+		new_position = params[:page].delete(:position)
 		# Instantiate a new object using form parameters
 		@page = Page.new(params[:page])
 		# Save the object
 		if @page.save
+			@page.move_to_position(new_position)
 			# If save succeeds, redirect to the list action
 			flash[:notice] = "Page created."
 			redirect_to(:action => 'list', :subject_id => @page.subject_id)
@@ -50,7 +52,9 @@ class PagesController < ApplicationController
 		# Find object using form parameters
 		@page = Page.find(params[:id])
 		# Update the object
+		new_position = params[:page].delete(:position)
 		if @page.update_attributes(params[:page])
+			@page.move_to_position(new_position)
 			# If update succeeds, redirect to the list action
 			flash[:notice] = "Page updated."
 			redirect_to(:action => 'show', :id => @page.id, :subject_id => @page.subject.id)
@@ -67,7 +71,9 @@ class PagesController < ApplicationController
 	end
 
 	def destroy
-		Page.find(params[:id]).destroy
+		page = Page.find(params[:id])
+		page.move_to_position(nil)
+		page.destroy
 		flash[:notice] = "Page destroyed."
 		redirect_to(:action => 'list', :subject_id => @subject.id)
 	end
