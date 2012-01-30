@@ -32,4 +32,15 @@ class DemoController < ApplicationController
         #render(:text => @something.upcase) # undefined method on nil
         #render(:text => "1" + 1) # can't convert type
     end
+
+    def logging
+        @subjects = Subject.all
+        ActiveSupport::Deprecation.warn("This is a deprecation")
+        logger.debug("This is debug.")
+        logger.info("This is info.")
+        logger.warn("This is warn.")
+        logger.error("This is error.")
+        logger.fatal("This is fatal.")
+        render(:text => 'Logged!')
+    end
 end
