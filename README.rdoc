@@ -1,10 +1,10 @@
-== Simple CMS ==
+== Simple CMS
 
-Just an ordinary content management system made while learning the rails framework.
+===Just an ordinary content management system made while learning the rails framework.
 
-Implemented user accounts and backend admin pages.
+===Implemented user accounts and backend admin pages.
 
-Demo user account:
-user: administrator
-password: password
+===Demo user account:
+  user: administrator
+  password: password
 
